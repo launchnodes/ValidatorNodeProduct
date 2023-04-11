@@ -2,7 +2,7 @@
 
 echo "Downloading the requirements"
 curl -LO https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-darwin-amd64.tar.gz
-tar -zxvf staking_deposit-cli-d7b5304-darwin-amd64.tar.gzs
+tar -zxvf staking_deposit-cli-d7b5304-darwin-amd64.tar.gz
 cd staking_deposit-cli-d7b5304-darwin-amd64
 
 echo "Please enter the path for deposit_data.json file: "
