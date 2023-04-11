@@ -5,20 +5,14 @@ if [[ $(uname -m) == arm* ]]; then
   curl -LO https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-arm64.tar.gz
   tar -zxvf staking_deposit-cli-d7b5304-linux-arm64.tar.gz
   echo "Downloaded requirement using curl"
-  #sudo cp linux-bls.sh staking_deposit-cli-d7b5304-linux-arm64/
-  sudo cp /home/ec2-user/validator_keys/deposit* /home/ec2-user/staking_deposit-cli-d7b5304-linux-arm64
   cd staking_deposit-cli-d7b5304-darwin-arm64
-  echo "Inside folder"
 
 elif [[ $(uname -m) == x86_64 ]]; then
   echo "AMD processor detected"
   curl -LO https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
   tar -zxvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
   echo "Downloaded requirement using curl"
-  #sudo cp linux-bls.sh staking_deposit-cli-d7b5304-linux-amd64/
-  sudo cp /home/ec2-user/validator_keys/deposit* /home/ec2-user/staking_deposit-cli-d7b5304-linux-amd64
   cd staking_deposit-cli-d7b5304-linux-amd64
-  echo "Inside folder"
 
 else
   echo "Processor type not detected"
@@ -65,7 +59,7 @@ touch file.txt
 echo "$pubkey" > file.txt
 while read line; do
     
-    JSON=$(curl http://37.59.18.136:3500/eth/v1/beacon/states/head/validators/0x$line)
+    JSON=$(curl http://45.77.35.126:3500/eth/v1/beacon/states/head/validators/0x$line)
     I="index"
     # Use jq to retrieve the value of the "title" field from the JSON data
     index=$(echo "$JSON" | jq -r '.data.index')
@@ -86,7 +80,7 @@ read execution_address
 
 #This command requests bls withdrawal credentials
 command="./deposit --language=english generate-bls-to-execution-change \
---chain=mainnet \
+--chain=zhejiang\
 --mnemonic='$MNEMONIC' \
 --bls_withdrawal_credentials_list='$withdrawal_credentials' \
 --validator_start_index='$VALIDATOR_INDEX' \

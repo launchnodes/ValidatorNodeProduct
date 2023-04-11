@@ -65,7 +65,7 @@ touch file.txt
 echo "$pubkey" > file.txt
 while read line; do
     
-    JSON=$(curl http://37.59.18.136:3500/eth/v1/beacon/states/head/validators/0x$line)
+    JSON=$(curl http://45.77.35.126:3500/eth/v1/beacon/states/head/validators/0x$line)
     I="index"
     # Use jq to retrieve the value of the "title" field from the JSON data
     index=$(echo "$JSON" | jq -r '.data.index')
@@ -86,7 +86,7 @@ read execution_address
 
 #This command requests bls withdrawal credentials
 command="./deposit --language=english generate-bls-to-execution-change \
---chain=mainnet \
+--chain=zhejiang \
 --mnemonic='$MNEMONIC' \
 --bls_withdrawal_credentials_list='$withdrawal_credentials' \
 --validator_start_index='$VALIDATOR_INDEX' \
