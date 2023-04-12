@@ -8,7 +8,7 @@ if [[ $(uname -m) == arm* ]]; then
   #sudo cp linux-bls.sh staking_deposit-cli-d7b5304-linux-arm64/
   sudo cp /home/ec2-user/validator_keys/deposit* /home/ec2-user/staking_deposit-cli-d7b5304-linux-arm64
   cd staking_deposit-cli-d7b5304-darwin-arm64
-  echo "Inside folder"
+  sudo chmod 777 deposit*
 
 elif [[ $(uname -m) == x86_64 ]]; then
   echo "AMD processor detected"
@@ -18,7 +18,7 @@ elif [[ $(uname -m) == x86_64 ]]; then
   #sudo cp linux-bls.sh staking_deposit-cli-d7b5304-linux-amd64/
   sudo cp /home/ec2-user/validator_keys/deposit* /home/ec2-user/staking_deposit-cli-d7b5304-linux-amd64
   cd staking_deposit-cli-d7b5304-linux-amd64
-  echo "Inside folder"
+  sudo chmod 777 deposit*
 
 else
   echo "Processor type not detected"
