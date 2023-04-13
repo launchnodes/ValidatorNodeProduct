@@ -1,23 +1,4 @@
 #!/bin/bash
-
-if [[ $(uname -m) == arm* ]]; then
-  echo "ARM processor detected"
-  curl -LO https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-arm64.tar.gz
-  tar -zxvf staking_deposit-cli-d7b5304-linux-arm64.tar.gz
-  echo "Downloaded requirement using curl"
-  cd staking_deposit-cli-d7b5304-darwin-arm64
-
-elif [[ $(uname -m) == x86_64 ]]; then
-  echo "AMD processor detected"
-  curl -LO https://github.com/ethereum/staking-deposit-cli/releases/download/v2.5.0/staking_deposit-cli-d7b5304-linux-amd64.tar.gz
-  tar -zxvf staking_deposit-cli-d7b5304-linux-amd64.tar.gz
-  echo "Downloaded requirement using curl"
-  cd staking_deposit-cli-d7b5304-linux-amd64
-
-else
-  echo "Processor type not detected"
-fi
-
 sudo chmod -R 777 /home/ec2-user/validator_keys
 echo "Please enter the path for deposit_data.json file: "
 read DEPOSIT_FILE
@@ -45,7 +26,6 @@ if ! command -v jq &> /dev/null; then
         echo "Detected Fedora-based distribution, installing jq..."
         sudo dnf install jq
     fi
-    exit 0
 else 
     echo "jq already installed"
 fi
@@ -59,7 +39,7 @@ touch file.txt
 echo "$pubkey" > file.txt
 while read line; do
     
-    JSON=$(curl http://37.59.18.136:3500/eth/v1/beacon/states/head/validators/0x$line)
+    JSON=$(curl http://45.77.35.126:3500/eth/v1/beacon/states/head/validators/0x$line)
     I="index"
     # Use jq to retrieve the value of the "title" field from the JSON data
     index=$(echo "$JSON" | jq -r '.data.index')
@@ -79,7 +59,7 @@ echo "Enter the execution address for withdrawals (your metamask wallet address)
 read execution_address
 
 #This command requests bls withdrawal credentials
-command="docker run -it --rm -v $(pwd):/app/bls_to_execution_changes public.ecr.aws/n2u0q7l0/depositcli:v2.0.5 --language=english generate-bls-to-execution-change --chain=mainnet --mnemonic='$MNEMONIC' --bls_withdrawal_credentials_list='$withdrawal_credentials' --validator_start_index='$VALIDATOR_INDEX' --validator_indices='$indices' --execution_address='$execution_address'"
+command="docker run -it --rm -v $(pwd):/app/bls_to_execution_changes public.ecr.aws/n2u0q7l0/depositcli:v2.0.5 --language=english generate-bls-to-execution-change --chain=zhejiang --mnemonic='$MNEMONIC' --bls_withdrawal_credentials_list='$withdrawal_credentials' --validator_start_index='$VALIDATOR_INDEX' --validator_indices='$indices' --execution_address='$execution_address'"
 
 
 
