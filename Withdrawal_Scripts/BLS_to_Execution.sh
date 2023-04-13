@@ -16,7 +16,6 @@ elif [[ $(uname -m) == x86_64 ]]; then
 
 else
   echo "Processor type not detected"
-  exit 0
 fi
 
 sudo chmod -R 777 /home/ec2-user/validator_keys
