@@ -19,6 +19,7 @@ else
   exit 0
 fi
 
+sudo chmod -R 777 /home/ec2-user/validator_keys
 echo "Please enter the path for deposit_data.json file: "
 read DEPOSIT_FILE
 
@@ -79,13 +80,9 @@ echo "Enter the execution address for withdrawals (your metamask wallet address)
 read execution_address
 
 #This command requests bls withdrawal credentials
-command="./deposit --language=english generate-bls-to-execution-change \
---chain=mainnet \
---mnemonic='$MNEMONIC' \
---bls_withdrawal_credentials_list='$withdrawal_credentials' \
---validator_start_index='$VALIDATOR_INDEX' \
---validator_indices='$indices' \
---execution_address='$execution_address'"
+command="docker run -it --rm -v $(pwd):/app/bls_to_execution_changes public.ecr.aws/n2u0q7l0/depositcli:v2.0.5 --language=english generate-bls-to-execution-change --chain=mainnet --mnemonic='$MNEMONIC' --bls_withdrawal_credentials_list='$withdrawal_credentials' --validator_start_index='$VALIDATOR_INDEX' --validator_indices='$indices' --execution_address='$execution_address'"
+
+
 
 # Execution ofthe command
 echo "Executing the following command:"
