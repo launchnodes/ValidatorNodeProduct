@@ -1,5 +1,5 @@
 {
-  "image": "gcr.io/prysmaticlabs/prysm/validator:v6.0.0",
+  "image": "gcr.io/prysmaticlabs/prysm/validator:v6.0.1",
   "date": "18 Feb 2025, 14:36:11",
   "description": "New version of Prysm validator"
 }
