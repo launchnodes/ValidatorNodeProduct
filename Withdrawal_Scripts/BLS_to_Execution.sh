@@ -39,7 +39,7 @@ touch file.txt
 echo "$pubkey" > file.txt
 while read line; do
     
-    JSON=$(curl http://37.59.18.136:3500/eth/v1/beacon/states/head/validators/0x$line)
+    JSON=$(curl http://54.219.42.228:3500/eth/v1/beacon/states/head/validators/0x$line)
     I="index"
     # Use jq to retrieve the value of the "title" field from the JSON data
     index=$(echo "$JSON" | jq -r '.data.index')
